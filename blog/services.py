@@ -2,7 +2,7 @@ import grpc
 from google.protobuf import empty_pb2
 from django_grpc_framework.services import Service
 from blog.models import Post
-from blog.serializers import PostProtoSerializer
+from blog.serializers import PostProtoSerializer, UserProtoSerializer
 
 
 class PostService(Service):
@@ -40,3 +40,9 @@ class PostService(Service):
         post = self.get_object(request.id)
         post.delete()
         return empty_pb2.Empty()
+
+    def SignUp(self, request, context):
+        serializer = UserProtoSerializer(message=request)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return serializer

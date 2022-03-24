@@ -18,3 +18,6 @@ with grpc.insecure_channel('localhost:50051') as channel:
     print(response, end='')
     print('----- Delete -----')
     stub.Destroy(post_pb2.Post(id=response.id))
+    print('----Signup----')
+    response = stub.SignUp(post_pb2.User(username="ghana", password="ghana70"))
+    print(response, end="")

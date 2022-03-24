@@ -10,6 +10,7 @@ service PostController {
     rpc Retrieve(PostRetrieveRequest) returns (Post) {}
     rpc Update(Post) returns (Post) {}
     rpc Destroy(Post) returns (google.protobuf.Empty) {}
+    rpc SignUp(User)returns (User){}
 }
 
 message Post {
@@ -23,4 +24,10 @@ message PostListRequest {
 
 message PostRetrieveRequest {
     int64 id = 1;
+}
+
+message User {
+    int64 id = 1;
+    string username = 2;
+    string password = 3;
 }

@@ -41,8 +41,21 @@ class PostService(Service):
         post.delete()
         return empty_pb2.Empty()
 
+    # def SignUp(self, request, context):
+    #     serializer = UserProtoSerializer(message=request)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return serializer
+
+    # User SignUp
     def SignUp(self, request, context):
         serializer = UserProtoSerializer(message=request)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return serializer
+        return serializer.message
+
+
+  
+        
+
+    

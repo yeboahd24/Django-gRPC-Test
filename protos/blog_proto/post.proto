@@ -11,6 +11,7 @@ service PostController {
     rpc Update(Post) returns (Post) {}
     rpc Destroy(Post) returns (google.protobuf.Empty) {}
     rpc SignUp(User)returns (User){}
+  
 }
 
 message Post {

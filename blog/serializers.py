@@ -13,13 +13,23 @@ class PostProtoSerializer(proto_serializers.ModelProtoSerializer):
         proto_class = post_pb2.Post
         fields = ['id', 'title', 'content']
 
+# class UserProtoSerializer(proto_serializers.ModelProtoSerializer):
+#     class Meta:
+#         model = User
+#         proto_class = post_pb2.User
+#         fields = ['id', 'username', 'password']
+
+   
 class UserProtoSerializer(proto_serializers.ModelProtoSerializer):
     class Meta:
         model = User
         proto_class = post_pb2.User
         fields = ['id', 'username', 'password']
 
-    # def save(self, *args, **kwargs):
-    #     self.fields['password'] = make_password(bytes(self.fields['password']))
-        # self.fields['password'] = SHA1PasswordHasher().encode(self.fields['password'], salt="@x123")
+    def create(self, validated_data):
+        user = User.objects.create(
+            username=validated_data['username'],
+            password=make_password(validated_data['password'])
+        )
+        return user
 
